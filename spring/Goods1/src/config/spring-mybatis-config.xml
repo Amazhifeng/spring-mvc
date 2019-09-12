@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--配置C3P0连接池-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${c3p0.driverClassName}"></property>
+        <property name="jdbcUrl" value="${c3p0.url}"></property>
+        <property name="user" value="${c3p0.username}"></property>
+        <property name="password" value="${c3p0.password}"></property>
+        <property name="maxPoolSize" value="${c3p0.maxActive}"></property>
+        <property name="maxIdleTime" value="${c3p0.maxIdle}"></property>
+    </bean>
+
+    <!--配置SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:config/mybatis-config.xml"></property>
+        <property name="typeAliasesPackage" value="com.goods.domain"></property>
+    </bean>
+
+
+    <!--以配置文件的形式配置一个userDaoImpl-->
+    <!--<bean id="userDao" class="com.itszt.dao.UserDaoImpl">-->
+    <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>-->
+    <!--</bean>-->
+    <!--设置我们扫描mapper的包-->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        <property name="basePackage" value="com.goods.dao"></property>
+    </bean>
+
+</beans>

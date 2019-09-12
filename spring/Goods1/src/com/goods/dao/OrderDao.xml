@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--引入DTD约束-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 开始构建映射-->
+<mapper namespace="com.goods.dao.OrderDao">
+
+    <resultMap id="orderRM" type="order">
+
+
+        <id property="orderid" column="orderid"></id>
+        <result property="fName" column="sendName"></result>
+        <result property="fPhone" column="sendTel"></result>
+        <result property="fAddress" column="sendAddr"></result>
+        <result property="sName" column="recvName"></result>
+
+        <result property="sPhone" column="recvTel"></result>
+        <result property="sAddress" column="recvAddr"></result>
+        <result property="comments" column="comments"></result>
+        <result property="userid" column="userid"></result>
+    </resultMap>
+
+</mapper>
